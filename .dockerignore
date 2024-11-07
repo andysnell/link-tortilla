@@ -1,6 +1,7 @@
+.env
+.idea
 .github
 build
-storage
 vendor
 docker-compose.override.yml
 phpunit.xml

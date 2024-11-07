@@ -3,41 +3,27 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector;
-use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
-use Rector\PHPUnit\Set\PHPUnitLevelSetList;
-use Rector\PHPUnit\Set\PHPUnitSetList;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Set\ValueObject\SetList;
+use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
+use Rector\Php83\Rector\ClassConst\AddTypeToConstRector;
+use Rector\TypeDeclaration\Rector\StmtsAwareInterface\DeclareStrictTypesRector;
+use Rector\ValueObject\PhpVersion;
 
-return static function (RectorConfig $config): void {
-    $config->importNames(true);
-    $config->importShortClasses(false);
-    $config->phpstanConfig(__DIR__ . '/phpstan.dist.neon');
-
-    $config->bootstrapFiles([
-        __DIR__ . '/vendor/autoload.php',
-    ]);
-
-    $config->paths([
+return RectorConfig::configure()
+    ->withPhpVersion(PhpVersion::PHP_81)
+    ->withImportNames(importShortClasses: false)
+    ->withCache(__DIR__ . '/build/rector')
+    ->withRootFiles()
+    ->withPaths([
         __DIR__ . '/src',
         __DIR__ . '/tests',
+    ])
+    ->withPhpSets(php83: true)
+    ->withAttributesSets(phpunit: true)
+    ->withPreparedSets(codeQuality: true, codingStyle: true, typeDeclarations: true, phpunit: true)
+    ->withRules([
+        DeclareStrictTypesRector::class,
+        AddTypeToConstRector::class,
+    ])
+    ->withSkip([
+        ClosureToArrowFunctionRector::class,
     ]);
-
-    $config->sets([
-        LevelSetList::UP_TO_PHP_82,
-        SetList::TYPE_DECLARATION,
-        SetList::CODE_QUALITY,
-        SetList::CODING_STYLE,
-        PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
-        PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
-        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-    ]);
-
-    $config->skip([
-        PreferPHPUnitThisCallRector::class,
-        AddSeeTestAnnotationRector::class,
-    ]);
-
-    $config->phpVersion(80100);
-};

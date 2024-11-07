@@ -4,5 +4,6 @@ parameters:
     paths:
         - src
         - tests
+
     ignoreErrors:
-        - message: '/no value type specified in iterable/'
+        - identifier: missingType.iterableValue
