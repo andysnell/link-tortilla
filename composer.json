@@ -46,7 +46,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PhoneBurner\\Tests\\LinkTortilla\\": "tests/"
+            "PhoneBurner\\LinkTortilla\\Tests\\": "tests/"
         }
     },
     "config": {

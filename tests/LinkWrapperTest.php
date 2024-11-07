@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhoneBurner\Tests\LinkTortilla;
+namespace PhoneBurner\LinkTortilla\Tests;
 
 use PhoneBurner\LinkTortilla\Link;
-use PhoneBurner\Tests\LinkTortilla\Fixtures\LinkWrapperFixture;
+use PhoneBurner\LinkTortilla\Tests\Fixtures\LinkWrapperFixture;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

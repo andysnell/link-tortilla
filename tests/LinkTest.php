@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhoneBurner\Tests\LinkTortilla;
+namespace PhoneBurner\LinkTortilla\Tests;
 
 use Generator;
 use GuzzleHttp\Psr7\Uri;

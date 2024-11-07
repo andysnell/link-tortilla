@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhoneBurner\Tests\LinkTortilla\Fixtures;
+namespace PhoneBurner\LinkTortilla\Tests\Fixtures;
 
 use PhoneBurner\LinkTortilla\LinkWrapper;
 use Psr\Link\LinkInterface;
