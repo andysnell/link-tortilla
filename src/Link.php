@@ -13,6 +13,7 @@ class Link implements EvolvableLinkInterface
         public readonly string $href,
         public readonly array $rels = [],
         public readonly array $attributes = [],
+        public readonly bool $is_array = false,
     ) {
         $this->href ?: throw new \InvalidArgumentException('href cannot be empty string');
     }
@@ -83,5 +84,10 @@ class Link implements EvolvableLinkInterface
         unset($attributes[$attribute]);
 
         return new static($this->href, $this->rels, $attributes);
+    }
+
+    public function asArray(): static
+    {
+        return new static($this->href, $this->rels, $this->attributes, true);
     }
 }

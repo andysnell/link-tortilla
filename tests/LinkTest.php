@@ -29,6 +29,23 @@ class LinkTest extends TestCase
         self::assertSame([$rel], $link->getRels());
         self::assertSame($expected, $link->getHref());
         self::assertSame([], $link->getAttributes());
+        self::assertFalse($link->is_array);
+    }
+
+    #[Test]
+    #[DataProvider('providesValidMakeInputs')]
+    public function asArrayReturnsNewStaticInstanceOfLink(
+        string $rel,
+        string|Stringable|UriInterface $href,
+        string $expected,
+    ): void {
+        $link = Link::make($rel, $href)->asArray();
+
+        self::assertInstanceOf(EvolvableLinkInterface::class, $link);
+        self::assertSame([$rel], $link->getRels());
+        self::assertSame($expected, $link->getHref());
+        self::assertSame([], $link->getAttributes());
+        self::assertTrue($link->is_array);
     }
 
     public static function providesValidMakeInputs(): Generator
