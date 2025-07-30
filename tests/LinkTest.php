@@ -14,7 +14,7 @@ use Psr\Http\Message\UriInterface;
 use Psr\Link\EvolvableLinkInterface;
 use Stringable;
 
-class LinkTest extends TestCase
+final class LinkTest extends TestCase
 {
     #[Test]
     #[DataProvider('providesValidMakeInputs')]
@@ -112,12 +112,10 @@ class LinkTest extends TestCase
         self::assertNotSame($link, $evolved);
     }
 
-    public static function dataProviderWithHrefReturnsNewInstanceWithHref(): array
+    public static function dataProviderWithHrefReturnsNewInstanceWithHref(): \Generator
     {
-        return [
-            ["HTTPS://EXAMPLE.COM/FOO", "HTTPS://EXAMPLE.COM/BAR"],
-            ["HTTPS://EXAMPLE.COM/FOO", "HTTPS://EXAMPLE.COM/FOO"],
-        ];
+        yield ["HTTPS://EXAMPLE.COM/FOO", "HTTPS://EXAMPLE.COM/BAR"];
+        yield ["HTTPS://EXAMPLE.COM/FOO", "HTTPS://EXAMPLE.COM/FOO"];
     }
 
     #[Test]
@@ -133,16 +131,14 @@ class LinkTest extends TestCase
         self::assertSame($expected, Link::make('self', $href)->isTemplated());
     }
 
-    public static function dataProviderIsTemplatedReturnsTrueIfLinkIsTemplated(): array
+    public static function dataProviderIsTemplatedReturnsTrueIfLinkIsTemplated(): \Generator
     {
-        return [
-            [false, "HTTPS://EXAMPLE.COM"],
-            [false, "HTTPS://EXAMPLE.COM/FOO/12345"],
-            [false, "/FOO/12345"],
-            [true, "HTTPS://EXAMPLE.COM/ORDERS/{ORDER}"],
-            [true, "/ORDERS/{ORDER}"],
-            [true, "HTTPS://EXAMPLE.COM/FOO/12345{?PAGE}"],
-        ];
+        yield [false, "HTTPS://EXAMPLE.COM"];
+        yield [false, "HTTPS://EXAMPLE.COM/FOO/12345"];
+        yield [false, "/FOO/12345"];
+        yield [true, "HTTPS://EXAMPLE.COM/ORDERS/{ORDER}"];
+        yield [true, "/ORDERS/{ORDER}"];
+        yield [true, "HTTPS://EXAMPLE.COM/FOO/12345{?PAGE}"];
     }
 
     #[Test]

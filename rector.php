@@ -2,14 +2,18 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
+use Rector\CodeQuality\Rector\Expression\InlineIfToExplicitIfRector;
+use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
+use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
+use Rector\CodingStyle\Rector\Catch_\CatchExceptionNameMatchingTypeRector;
+use Rector\CodingStyle\Rector\ClassMethod\NewlineBeforeNewAssignSetRector;
+use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
 use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
-use Rector\Php83\Rector\ClassConst\AddTypeToConstRector;
-use Rector\TypeDeclaration\Rector\StmtsAwareInterface\DeclareStrictTypesRector;
-use Rector\ValueObject\PhpVersion;
+use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 
 return RectorConfig::configure()
-    ->withPhpVersion(PhpVersion::PHP_81)
     ->withImportNames(importShortClasses: false)
     ->withCache(__DIR__ . '/build/rector')
     ->withRootFiles()
@@ -17,13 +21,26 @@ return RectorConfig::configure()
         __DIR__ . '/src',
         __DIR__ . '/tests',
     ])
-    ->withPhpSets(php83: true)
-    ->withAttributesSets(phpunit: true)
-    ->withPreparedSets(codeQuality: true, codingStyle: true, typeDeclarations: true, phpunit: true)
-    ->withRules([
-        DeclareStrictTypesRector::class,
-        AddTypeToConstRector::class,
-    ])
-    ->withSkip([
+    ->withPhpSets(php84: true)
+    ->withAttributesSets(all: true)
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        codingStyle: true,
+        typeDeclarations: true,
+        privatization: true,
+        instanceOf: true,
+        earlyReturn: true,
+        rectorPreset: true,
+        phpunitCodeQuality: true,
+    )->withSkip([
         ClosureToArrowFunctionRector::class,
+        FlipTypeControlToUseExclusiveTypeRector::class,
+        PreferPHPUnitThisCallRector::class,
+        InlineIfToExplicitIfRector::class,
+        LocallyCalledStaticMethodToNonStaticRector::class,
+        ExplicitBoolCompareRector::class,
+        NewlineAfterStatementRector::class,
+        NewlineBeforeNewAssignSetRector::class,
+        CatchExceptionNameMatchingTypeRector::class,
     ]);

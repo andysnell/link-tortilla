@@ -1,12 +1,40 @@
-/.idea/
-/.github/
-/build/
-/vendor/
-/html/phpunit
+# Ignore IDE, & AI Directories
+/.aiignore
+/.cursor
+/.idea
+/.junie
+/.phpstorm.meta.php
+/.run
+/.vscode
 
+# Ignore Local, Build, Test and Vendor Directories
+/.local
+/build
+/public/local
+/public/phpunit
+/vendor
+*.terraform
+
+# Ignore environment files, except for the default distribution file
 .env
-phpunit.xml
-settings.ini
-user.ini
+.env.*
+*.private.env.json
+!.env.dist
+
+# Ignore boilerplate and development tooling files
 docker-compose.override.yml
+docker-compose.override.yaml
+compose.override.yml
+compose.override.yaml
+phpstan-baseline.*.neon
+phpstan-baseline.*.php
+phpstan-baseline.neon
+phpstan-baseline.php
 phpstan.neon
+phpunit.xml
+
+# Ignore INI Files
+*.ini
+!php-development.ini
+!php-production.ini
+

@@ -17,7 +17,7 @@ The preferred method of installation is to use [Composer](https://getcomposer.or
 composer require phoneburner/link-tortilla
 ```
 
-This library currently requires PHP >= 8.1 and [`psr/link`](https://github.com/php-fig/link) ^2.0.
+This library currently requires PHP >= 8.2 and [`psr/link`](https://github.com/php-fig/link) ^2.0.
 
 ## Usage
 
@@ -56,5 +56,3 @@ Keeping user information safe and secure is a top priority, and we welcome the
 contribution of external security researchers. If you believe you've found a
 security issue, please read [SECURITY.md](SECURITY.md) for instructions on
 submitting a vulnerability report.
-
-

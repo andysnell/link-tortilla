@@ -9,7 +9,7 @@ use PhoneBurner\LinkTortilla\Tests\Fixtures\LinkWrapperFixture;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-class LinkWrapperTest extends TestCase
+final class LinkWrapperTest extends TestCase
 {
     #[Test]
     public function linkWrapperWrapsLinkInterface(): void
